@@ -18,6 +18,7 @@
 		2DCD954D1E0B4F2C00145EB5 /* RideShareTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* RideShareTests.m */; };
 		3010DED006B59A8608846DCA /* libPods-RideShare-RideShareTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F30C832F3549C3ADA570250B /* libPods-RideShare-RideShareTests.a */; };
 		46182DABBBBFAF0DA0BA5EEF /* libPods-RideShare-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A364EEFDDAD885EEB157817 /* libPods-RideShare-tvOSTests.a */; };
+		5945DAB4244C5C67000EB390 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5945DAB3244C5C67000EB390 /* GoogleService-Info.plist */; };
 		738B9A4623B797C9DE081FC6 /* libPods-RideShare-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CA09E3C44FC365C15AB3F0A0 /* libPods-RideShare-tvOS.a */; };
 		81E7ACEF9A06EE23557ED986 /* libPods-RideShare.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9218AC8AF5913BB5BBDE5C30 /* libPods-RideShare.a */; };
 /* End PBXBuildFile section */
@@ -55,6 +56,7 @@
 		2D02E47B1E0B4A5D006451C7 /* RideShare-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "RideShare-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* RideShare-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "RideShare-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A364EEFDDAD885EEB157817 /* libPods-RideShare-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RideShare-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5945DAB3244C5C67000EB390 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8E2445F8126F3C2F04F8D315 /* Pods-RideShare-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RideShare-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-RideShare-tvOSTests/Pods-RideShare-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		9218AC8AF5913BB5BBDE5C30 /* libPods-RideShare.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RideShare.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A83EC7E909328784F122E6AB /* Pods-RideShare-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RideShare-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-RideShare-tvOS/Pods-RideShare-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
@@ -130,6 +132,7 @@
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
+				5945DAB3244C5C67000EB390 /* GoogleService-Info.plist */,
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
 				13B07FB71A68108700A75B9A /* main.m */,
 			);
@@ -148,7 +151,6 @@
 				F728E6D1F3DF9808EF966EA2 /* Pods-RideShare-tvOSTests.debug.xcconfig */,
 				8E2445F8126F3C2F04F8D315 /* Pods-RideShare-tvOSTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -292,6 +294,7 @@
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
+						DevelopmentTeam = K4QVVLY2P7;
 						LastSwiftMigration = 1120;
 					};
 					2D02E47A1E0B4A5D006451C7 = {
@@ -340,6 +343,7 @@
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
+				5945DAB4244C5C67000EB390 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -630,6 +634,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = K4QVVLY2P7;
 				ENABLE_BITCODE = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
@@ -642,7 +647,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.DevTeam.RideShare;
 				PRODUCT_NAME = RideShare;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -657,6 +662,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = K4QVVLY2P7;
 				INFOPLIST_FILE = RideShare/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -664,7 +670,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.DevTeam.RideShare;
 				PRODUCT_NAME = RideShare;
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
