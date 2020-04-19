@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "89826865053-0nudk9voalrvnd518bjkcefk36uualdq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.DevTeam.RideShare",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
           "client_id": "89826865053-ej28el8aqbequcsq61t2f6eev86t6h24.apps.googleusercontent.com",
           "client_type": 3
         }
