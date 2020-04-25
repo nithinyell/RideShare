@@ -79,7 +79,7 @@ target 'RideShare' do
 
   # Custom Pods
   # add the Firebase pod for Google Analytics
-  pod 'Firebase/Analytics'
+  # pod 'Firebase/Analytics'
   
   target 'RideShareTests' do
     inherit! :complete
