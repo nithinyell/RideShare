@@ -7,6 +7,10 @@
  */
 
 import React from 'react';
+import 'react-native-gesture-handler'
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+
 import {
   SafeAreaView,
   StyleSheet,
@@ -25,14 +29,23 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 import Login from './Components/Login';
+import Home from './Components/Home';
+
+const Stack = createStackNavigator()
 
 const App: () => React$Node = () => {
   return (
     <>
-      <StatusBar barStyle="dark-content" />
-      <SafeAreaView style={{alignItems: 'center'}}>
-         <Login/>
-      </SafeAreaView>
+      <NavigationContainer>
+        {/* <StatusBar barStyle="dark-content" />
+        <SafeAreaView style={{ alignItems: 'center' }}>
+          <Login />
+        </SafeAreaView> */}
+        <Stack.Navigator>
+        <Stack.Screen name="Login" component={Login}/>
+        <Stack.Screen name="Home" component={Home} />
+        </Stack.Navigator>
+      </NavigationContainer>
     </>
   );
 };

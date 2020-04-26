@@ -1,15 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, Image, ScrollView, TextInput, TouchableOpacity, Button } from 'react-native';
 import auth from '@react-native-firebase/auth';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 
 // ToDo: https://rnfirebase.io/auth/phone-auth
 // https://github.com/nithinyell/react-native-firebase
-export default function Login() {
+export default function Login({ navigation }) {
 
   const [confirm, setConfirm] = useState(false);
   const [code, setCode] = useState('');
   const [user, setUser] = useState(null);
   const [userPhoneNumber, setUserphoneNumber] = useState(null)
+
+  useEffect(() => {
+    auth().onAuthStateChanged(onAuthStateChanged)
+  })
 
   async function signInWithPhoneNumber(phoneNumber) {
     try {
@@ -20,19 +26,25 @@ export default function Login() {
     }
   }
 
-  function onAuthStateChanged(user) {
-    if (user.displayName) {
-      setUser(ususer.displayNameer);
+  function onAuthStateChanged(rawUser) {
+    if (rawUser) {
+      if (rawUser.displayName) {
+        setUser(rawUser.displayNameer);
+      } else {
+        setUser(rawUser.phoneNumber)
+      }
+      navigation.navigate('Home', {
+        userName: "Sai Ram"
+      })
     } else {
-      setUser(user.phoneNumber)
+      setConfirm(false)
     }
   }
 
   async function confirmCode() {
     try {
       await confirm.confirm(code);
-      const sub = auth().onAuthStateChanged(onAuthStateChanged)
-      console.log(sub)
+      auth().onAuthStateChanged(onAuthStateChanged)
     } catch (error) {
       console.log('Invalid code.', error);
     }
