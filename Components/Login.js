@@ -33,11 +33,10 @@ export default function Login({ navigation }) {
       } else {
         setUser(rawUser.phoneNumber)
       }
-      navigation.navigate('Home', {
+      navigation.navigate('HomeScreens', {
+        screen: 'Home',
         userName: "Sai Ram"
       })
-    } else {
-      setConfirm(false)
     }
   }
 
@@ -50,30 +49,22 @@ export default function Login({ navigation }) {
     }
   }
 
-  if (user) {
+  if (confirm) {
     return (
       <View>
-        <Text>Hi {user}</Text>
+        <TextInput style={{ borderColor: 'red', borderRadius: 1, backgroundColor: 'red', width: 60 }} value={code} onChangeText={text => setCode(text)} />
+        <Button title="Confirm Code" onPress={() => confirmCode()} />
       </View>
     )
-  } else {
-    if (confirm) {
-      return (
-        <>
-          <TextInput style={{ borderColor: 'red', borderRadius: 1, backgroundColor: 'red', width: 60 }} value={code} onChangeText={text => setCode(text)} />
-          <Button title="Confirm Code" onPress={() => confirmCode()} />
-        </>
-      )
-    } else {
-      return (
-        <View>
-          <TextInput onChangeText={text => setUserphoneNumber(text)} />
-          <Button
-            title="Phone Number Sign In"
-            onPress={() => signInWithPhoneNumber("+15413712599")}
-          />
-        </View>
-      )
-    }
-  }
+  } 
+
+  return (
+    <View>
+      <TextInput onChangeText={text => setUserphoneNumber(text)} />
+      <Button
+        title="Phone Number Sign In"
+        onPress={() => signInWithPhoneNumber("+15413712599")}
+      />
+    </View>
+  )
 }

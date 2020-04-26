@@ -8,8 +8,9 @@
 
 import React from 'react';
 import 'react-native-gesture-handler'
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, TabActions } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import {
   SafeAreaView,
@@ -30,10 +31,22 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 import Login from './Components/Login';
 import Home from './Components/Home';
+import Profile from './Components/Profile';
 
 const Stack = createStackNavigator()
+const Tab = createBottomTabNavigator();
 
 const App: () => React$Node = () => {
+
+  function HomeScreens() {
+    return (
+      <Tab.Navigator>
+            <Tab.Screen name='Home' component={Home}/>
+            <Tab.Screen name='Profile' component={Profile}/>
+      </Tab.Navigator>
+    )
+  }
+
   return (
     <>
       <NavigationContainer>
@@ -43,7 +56,7 @@ const App: () => React$Node = () => {
         </SafeAreaView> */}
         <Stack.Navigator>
         <Stack.Screen name="Login" component={Login}/>
-        <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen name="HomeScreens" component={HomeScreens}/>
         </Stack.Navigator>
       </NavigationContainer>
     </>
