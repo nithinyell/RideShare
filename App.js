@@ -7,73 +7,55 @@
  */
 
 import React from 'react';
-import {
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
-  View,
-  Text,
-  StatusBar,
-  TouchableOpacity,
-} from 'react-native';
+import 'react-native-gesture-handler'
+import { NavigationContainer, TabActions } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import {
-  Header,
-  LearnMoreLinks,
-  Colors,
-  DebugInstructions,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
 import Login from './Components/Login';
+import Home from './Components/Home';
+import Profile from './Components/Profile';
+
+const Stack = createStackNavigator()
+const Tab = createBottomTabNavigator()
 
 const App: () => React$Node = () => {
+
+  function HomeStack() {
+    return (
+      <Stack.Navigator>
+        <Stack.Screen name="Home" component={Home}/>
+      </Stack.Navigator>
+    )
+  }
+
+  function ProfileStack() {
+    return(
+      <Stack.Navigator>
+        <Stack.Screen name="Profile" component={Profile}/>
+      </Stack.Navigator>
+    )
+  }
+
+  function HomeScreens() {
+    return (
+      <Tab.Navigator>
+            <Tab.Screen name='Home' component={HomeStack}/>
+            <Tab.Screen name='Profile' component={ProfileStack}/>
+      </Tab.Navigator>
+    )
+  }
+
   return (
     <>
-      <StatusBar barStyle="dark-content" />
-      <SafeAreaView style={{alignItems: 'center'}}>
-         <Login/>
-      </SafeAreaView>
+      <NavigationContainer>
+        <Stack.Navigator>
+        <Stack.Screen name="Login" component={Login} options={{headerShown: false}}/>
+        <Stack.Screen name="Ride Share" component={HomeScreens} options={{headerShown: false}}/>
+        </Stack.Navigator>
+      </NavigationContainer>
     </>
   );
 };
-
-const styles = StyleSheet.create({
-  scrollView: {
-    backgroundColor: Colors.lighter,
-  },
-  engine: {
-    position: 'absolute',
-    right: 0,
-  },
-  body: {
-    backgroundColor: Colors.white,
-  },
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-    color: Colors.black,
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-    color: Colors.dark,
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-  footer: {
-    color: Colors.dark,
-    fontSize: 12,
-    fontWeight: '600',
-    padding: 4,
-    paddingRight: 12,
-    textAlign: 'right',
-  },
-});
 
 export default App;
