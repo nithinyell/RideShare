@@ -1,11 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, Image, ScrollView, TextInput, TouchableOpacity, Button } from 'react-native';
 import auth from '@react-native-firebase/auth';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
 
-// ToDo: https://rnfirebase.io/auth/phone-auth
-// https://github.com/nithinyell/react-native-firebase
 export default function Login({ navigation }) {
 
   const [confirm, setConfirm] = useState(false);
