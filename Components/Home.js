@@ -3,10 +3,10 @@ import { View, Text, SafeAreaView } from 'react-native';
 
 export default function Home({ route, navigation }) {
 
-    //const {userName} = route.params
+    const {userName} = route.params
     return (
         <SafeAreaView>
-            <Text>Hai</Text>
+            <Text>Hai {userName}</Text>
         </SafeAreaView>
     )
 }

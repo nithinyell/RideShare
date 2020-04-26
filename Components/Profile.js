@@ -10,9 +10,8 @@ export default function Profile({ route, navigation }) {
 
     return (
         <SafeAreaView>
-            <Text>Settings !! </Text>
-            <Button title={"Log out"} onPress={() => logout()}>
-            </Button>
+            <Text> Settings !! </Text>
+            <Button title={"Log out"} onPress={() => logout()}/>
         </SafeAreaView>
     )
 }

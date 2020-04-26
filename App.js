@@ -17,15 +17,31 @@ import Home from './Components/Home';
 import Profile from './Components/Profile';
 
 const Stack = createStackNavigator()
-const Tab = createBottomTabNavigator();
+const Tab = createBottomTabNavigator()
 
 const App: () => React$Node = () => {
+
+  function HomeStack() {
+    return (
+      <Stack.Navigator>
+        <Stack.Screen name="Home" component={Home}/>
+      </Stack.Navigator>
+    )
+  }
+
+  function ProfileStack() {
+    return(
+      <Stack.Navigator>
+        <Stack.Screen name="Profile" component={Profile}/>
+      </Stack.Navigator>
+    )
+  }
 
   function HomeScreens() {
     return (
       <Tab.Navigator>
-            <Tab.Screen name='Home' component={Home}/>
-            <Tab.Screen name='Profile' component={Profile}/>
+            <Tab.Screen name='Home' component={HomeStack}/>
+            <Tab.Screen name='Profile' component={ProfileStack}/>
       </Tab.Navigator>
     )
   }
@@ -34,8 +50,8 @@ const App: () => React$Node = () => {
     <>
       <NavigationContainer>
         <Stack.Navigator>
-        <Stack.Screen name="Login" component={Login}/>
-        <Stack.Screen name="HomeScreens" component={HomeScreens}/>
+        <Stack.Screen name="Login" component={Login} options={{headerShown: false}}/>
+        <Stack.Screen name="Ride Share" component={HomeScreens} options={{headerShown: false}}/>
         </Stack.Navigator>
       </NavigationContainer>
     </>
