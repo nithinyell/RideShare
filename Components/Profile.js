@@ -4,6 +4,14 @@ import auth from '@react-native-firebase/auth';
 
 export default function Profile({ route, navigation }) {
 
+    React.useLayoutEffect(() => {
+        navigation.setOptions({
+            headerRight: () => (
+                <Button title="Sign Out" onPress={() => logout()} />
+              )
+        })
+    })
+    
     function logout() {
         auth().signOut().then(() => navigation.navigate('Login'))
     }
@@ -11,7 +19,6 @@ export default function Profile({ route, navigation }) {
     return (
         <SafeAreaView>
             <Text> Settings !! </Text>
-            <Button title={"Log out"} onPress={() => logout()}/>
         </SafeAreaView>
     )
 }
