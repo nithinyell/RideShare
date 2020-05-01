@@ -13,8 +13,11 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import Login from './Components/Login';
-import Home from './Components/Home';
-import Profile from './Components/Profile';
+import Home from './Components/Home/Home';
+import Profile from './Components/Profile/Profile';
+import Ride from './Components/Ride/Ride';
+import OfferARide from './Components/Ride/OfferARide';
+import SeekARide from './Components/Ride/SeekARide';
 
 const Stack = createStackNavigator()
 const Tab = createBottomTabNavigator()
@@ -37,11 +40,20 @@ const App: () => React$Node = () => {
     )
   }
 
+  function RideStack() {
+    return(
+      <Stack.Navigator>
+        <Stack.Screen name="Ride" component={Ride}/>
+      </Stack.Navigator>
+    )
+  }
+
   function HomeScreens() {
     return (
       <Tab.Navigator>
-            <Tab.Screen name='Home' component={HomeStack}/>
-            <Tab.Screen name='Profile' component={ProfileStack}/>
+        <Tab.Screen name='Ride' component={RideStack} />
+        <Tab.Screen name='Home' component={HomeStack} />
+        <Tab.Screen name='Profile' component={ProfileStack} />
       </Tab.Navigator>
     )
   }
