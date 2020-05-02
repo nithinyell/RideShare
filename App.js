@@ -19,6 +19,7 @@ import Profile from './Components/Profile/Profile';
 import Ride from './Components/Ride/Ride';
 import OfferARide from './Components/Ride/OfferARide';
 import SeekARide from './Components/Ride/SeekARide';
+import Request from './Components/Ride/Request';
 
 const Stack = createStackNavigator()
 const Tab = createBottomTabNavigator()
@@ -42,10 +43,19 @@ const App: () => React$Node = () => {
     )
   }
 
+  function SeekRideStack() {
+    return (
+      <Stack.Navigator mode='modal' headerMode='none'>
+        <Stack.Screen name='Accept' component={SeekARide} />
+        <Stack.Screen name='RequestModal' component={Request} />
+      </Stack.Navigator>
+    )
+  }
+
   function RideScenes() {
     return(
       <TopTab.Navigator>
-        <TopTab.Screen name="Accept" component={SeekARide}/>
+        <TopTab.Screen name="Accept" component={SeekRideStack}/>
         <TopTab.Screen name="Offer" component={OfferARide}/>
       </TopTab.Navigator>
     )
