@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, Image, ScrollView, TextInput, TouchableOpacity, Button, SafeAreaView } from 'react-native';
 import auth from '@react-native-firebase/auth';
+import AuthManager from './Auth/UserAuth';
 
 export default function Login({ navigation }) {
 
@@ -10,12 +11,14 @@ export default function Login({ navigation }) {
   const [userPhoneNumber, setUserphoneNumber] = useState(null)
 
   useEffect(() => {
+    console.log("Jai Guru --- Current User: ", AuthManager.currentUser())
+    console.log("Auth Change ", AuthManager.onAuthStateChanged())
     auth().onAuthStateChanged(onAuthStateChanged)
   })
 
   async function signInWithPhoneNumber(phoneNumber) {
     try {
-      const confirmation = await auth().signInWithPhoneNumber(phoneNumber)
+      const confirmation = AuthManager.signInWithPhoneNumber(phoneNumber)
       setConfirm(confirmation);
     } catch (error) {
       console.log("error", error)
@@ -44,7 +47,6 @@ export default function Login({ navigation }) {
   async function confirmCode() {
     try {
       await confirm.confirm(code);
-      auth().onAuthStateChanged(onAuthStateChanged)
     } catch (error) {
       console.log('Invalid code.', error);
     }
