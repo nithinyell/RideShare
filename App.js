@@ -11,6 +11,7 @@ import 'react-native-gesture-handler'
 import { NavigationContainer, TabActions } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 
 import Login from './Components/Login';
 import Home from './Components/Home/Home';
@@ -21,6 +22,7 @@ import SeekARide from './Components/Ride/SeekARide';
 
 const Stack = createStackNavigator()
 const Tab = createBottomTabNavigator()
+const TopTab = createMaterialTopTabNavigator()
 
 const App: () => React$Node = () => {
 
@@ -40,10 +42,19 @@ const App: () => React$Node = () => {
     )
   }
 
+  function RideScenes() {
+    return(
+      <TopTab.Navigator>
+        <TopTab.Screen name="Accept" component={SeekARide}/>
+        <TopTab.Screen name="Offer" component={OfferARide}/>
+      </TopTab.Navigator>
+    )
+  }
+
   function RideStack() {
     return(
       <Stack.Navigator>
-        <Stack.Screen name="Ride" component={Ride}/>
+        <Stack.Screen name="Ride" component={RideScenes}/>
       </Stack.Navigator>
     )
   }
