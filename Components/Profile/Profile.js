@@ -12,7 +12,7 @@ export default function Profile({ route, navigation }) {
         })
     })
     
-    function logout() {
+    function logout() { // TODO Move this to Auth Manager
         auth().signOut().then(() => navigation.navigate('Login'))
     }
 

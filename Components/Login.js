@@ -7,46 +7,35 @@ export default function Login({ navigation }) {
 
   const [confirm, setConfirm] = useState(false);
   const [code, setCode] = useState('');
-  const [user, setUser] = useState(null);
   const [userPhoneNumber, setUserphoneNumber] = useState(null)
 
   useEffect(() => {
-    console.log("Jai Guru --- Current User: ", AuthManager.currentUser())
-    console.log("Auth Change ", AuthManager.onAuthStateChanged())
-    auth().onAuthStateChanged(onAuthStateChanged)
+    auth().onAuthStateChanged((user) => {
+      if (user) {
+        navigation.navigate('Ride Share', {
+          screen: 'Home',
+          params: {
+            screen: 'Home',
+            params: {
+            }
+          }
+        })
+      }
+    })
   })
 
   async function signInWithPhoneNumber(phoneNumber) {
     try {
-      const confirmation = AuthManager.signInWithPhoneNumber(phoneNumber)
+      const confirmation = await AuthManager.signInWithPhoneNumber(phoneNumber)
       setConfirm(confirmation);
     } catch (error) {
       console.log("error", error)
     }
   }
 
-  function onAuthStateChanged(rawUser) {
-    if (rawUser) {
-      if (rawUser.displayName) {
-        setUser(rawUser._user.displayNameer);
-      } else {
-        setUser(rawUser._user.phoneNumber)
-      }
-      navigation.navigate('Ride Share', {
-        screen: 'Home',
-        params: {
-          screen: 'Home',
-          params: {
-            userName: user
-          }
-        }
-      })
-    }
-  }
-
   async function confirmCode() {
     try {
-      await confirm.confirm(code);
+      await confirm.confirm(code) //Confirm("Code") from FBase
     } catch (error) {
       console.log('Invalid code.', error);
     }

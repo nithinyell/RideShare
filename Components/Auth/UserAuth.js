@@ -9,24 +9,15 @@ const AuthManager = {
     signInWithPhoneNumber: async function (phoneNumber) {
         try {
             let signIn = await auth().signInWithPhoneNumber(phoneNumber)
-            console.log("signInWithPhoneNumber", signIn)
+            return signIn
         } catch (error) {
             console.log("Error", error)
+            return error
         }
     },
 
-    onAuthStateChanged: function() {
-        auth().onAuthStateChanged((user) => {
-            return user
-        })
-    },
-
-    isSignedIn: function() {
-
-    },
-
     signOut: function() {
-
+        
     }
 }
 
