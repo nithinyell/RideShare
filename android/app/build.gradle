@@ -136,7 +136,7 @@ android {
         versionCode 1
         versionName "1.0"
         multiDexEnabled true 
-        buildConfigField("String", "RNGP_ANDROID_API_KEY", "\"${RNGP_ANDROID_API_KEY}\"")
+        buildConfigField("String", "RNGP_ANDROID_API_KEY", "\"${RNGP_ANDROID_API_KEY}\"") // Check why it is added.
     }
     splits {
         abi {
