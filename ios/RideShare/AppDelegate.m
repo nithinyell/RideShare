@@ -13,6 +13,8 @@
 #import <FlipperKitReactPlugin/FlipperKitReactPlugin.h>
 
 @import Firebase;
+@import GooglePlaces;
+@import GoogleMaps;
 
 static void InitializeFlipper(UIApplication *application) {
   FlipperClient *client = [FlipperClient sharedClient];
@@ -48,6 +50,11 @@ static void InitializeFlipper(UIApplication *application) {
   
   // FireBase
   [FIRApp configure];
+  
+  // Google Maps
+  [GMSPlacesClient provideAPIKey:@"AIzaSyDg53FfhFAKxa4R-q7RLnHqS5IAurn2wmU"];
+  [GMSServices provideAPIKey:@"AIzaSyDg53FfhFAKxa4R-q7RLnHqS5IAurn2wmU"];
+  
   return YES;
 }
 

@@ -13,7 +13,7 @@
       android:allowBackup="false"
       android:theme="@style/AppTheme">
         <meta-data android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyBn_fovhkUoInxrFGICbiL108hgZAwbImY"/>
+            android:value="AIzaSyDg53FfhFAKxa4R-q7RLnHqS5IAurn2wmU"/>
       <activity
         android:name=".MainActivity"
         android:label="@string/app_name"
