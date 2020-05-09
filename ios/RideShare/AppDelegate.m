@@ -23,7 +23,7 @@ static void InitializeFlipper(UIApplication *application) {
 }
 #endif
 
-// @import Firebase; Used for Analytics
+@import Firebase;
 @import GooglePlaces;
 @import GoogleMaps;
 
@@ -49,7 +49,7 @@ static void InitializeFlipper(UIApplication *application) {
   [self.window makeKeyAndVisible];
   
   // FireBase
-  // [FIRApp configure]; We dont nee this as of now.
+  [FIRApp configure]; //need this to initiate FB
   
   // Google Maps
   [GMSPlacesClient provideAPIKey:@"AIzaSyDg53FfhFAKxa4R-q7RLnHqS5IAurn2wmU"];
