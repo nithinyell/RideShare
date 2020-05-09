@@ -97,12 +97,3 @@ target 'RideShare' do
     flipper_post_install(installer)
   end
 end
-
-target 'RideShare-tvOS' do
-  # Pods for RideShare-tvOS
-
-  target 'RideShare-tvOSTests' do
-    inherit! :search_paths
-    # Pods for testing
-  end
-end
