@@ -1,50 +1,41 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, Image, ScrollView, TextInput, TouchableOpacity, Button, SafeAreaView } from 'react-native';
 import auth from '@react-native-firebase/auth';
+import AuthManager from './Auth/UserAuth';
 
 export default function Login({ navigation }) {
 
   const [confirm, setConfirm] = useState(false);
   const [code, setCode] = useState('');
-  const [user, setUser] = useState(null);
   const [userPhoneNumber, setUserphoneNumber] = useState(null)
 
   useEffect(() => {
-    auth().onAuthStateChanged(onAuthStateChanged)
+    auth().onAuthStateChanged((user) => {
+      if (user) {
+        navigation.navigate('Ride Share', {
+          screen: 'Home',
+          params: {
+            screen: 'Home',
+            params: {
+            }
+          }
+        })
+      }
+    })
   })
 
   async function signInWithPhoneNumber(phoneNumber) {
     try {
-      const confirmation = await auth().signInWithPhoneNumber(phoneNumber)
+      const confirmation = await AuthManager.signInWithPhoneNumber(phoneNumber)
       setConfirm(confirmation);
     } catch (error) {
       console.log("error", error)
     }
   }
 
-  function onAuthStateChanged(rawUser) {
-    if (rawUser) {
-      if (rawUser.displayName) {
-        setUser(rawUser._user.displayNameer);
-      } else {
-        setUser(rawUser._user.phoneNumber)
-      }
-      navigation.navigate('Ride Share', {
-        screen: 'Home',
-        params: {
-          screen: 'Home',
-          params: {
-            userName: user
-          }
-        }
-      })
-    }
-  }
-
   async function confirmCode() {
     try {
-      await confirm.confirm(code);
-      auth().onAuthStateChanged(onAuthStateChanged)
+      await confirm.confirm(code) //Confirm("Code") from FBase
     } catch (error) {
       console.log('Invalid code.', error);
     }

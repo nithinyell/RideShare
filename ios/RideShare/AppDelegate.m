@@ -12,8 +12,6 @@
 #import <SKIOSNetworkPlugin/SKIOSNetworkAdapter.h>
 #import <FlipperKitReactPlugin/FlipperKitReactPlugin.h>
 
-@import Firebase;
-
 static void InitializeFlipper(UIApplication *application) {
   FlipperClient *client = [FlipperClient sharedClient];
   SKDescriptorMapper *layoutDescriptorMapper = [[SKDescriptorMapper alloc] initWithDefaults];
@@ -24,6 +22,10 @@ static void InitializeFlipper(UIApplication *application) {
   [client start];
 }
 #endif
+
+// @import Firebase; Used for Analytics
+@import GooglePlaces;
+@import GoogleMaps;
 
 @implementation AppDelegate
 
@@ -47,7 +49,12 @@ static void InitializeFlipper(UIApplication *application) {
   [self.window makeKeyAndVisible];
   
   // FireBase
-  [FIRApp configure];
+  // [FIRApp configure]; We dont nee this as of now.
+  
+  // Google Maps
+  [GMSPlacesClient provideAPIKey:@"AIzaSyDg53FfhFAKxa4R-q7RLnHqS5IAurn2wmU"];
+  [GMSServices provideAPIKey:@"AIzaSyDg53FfhFAKxa4R-q7RLnHqS5IAurn2wmU"];
+  
   return YES;
 }
 

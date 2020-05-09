@@ -1,8 +1,15 @@
 import * as React from 'react';
 import { View, Text, SafeAreaView, Button } from 'react-native';
 import auth from '@react-native-firebase/auth';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import database from '@react-native-firebase/database';
+import AuthManager from '../Auth/UserAuth';
 
 export default function Profile({ route, navigation }) {
+
+    var randomNumber = Math.floor(Math.random() * 100) + 1 
+    let reference = '/Pool/' + randomNumber + '/'
+    let poolReference = database().ref(reference)
 
     React.useLayoutEffect(() => {
         navigation.setOptions({
@@ -12,7 +19,7 @@ export default function Profile({ route, navigation }) {
         })
     })
     
-    function logout() {
+    function logout() { // TODO Move this to Auth Manager
         auth().signOut().then(() => navigation.navigate('Login'))
     }
 
