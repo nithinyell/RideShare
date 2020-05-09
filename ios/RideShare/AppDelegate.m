@@ -12,7 +12,7 @@
 #import <SKIOSNetworkPlugin/SKIOSNetworkAdapter.h>
 #import <FlipperKitReactPlugin/FlipperKitReactPlugin.h>
 
-@import Firebase;
+//@import Firebase; Used for Analytics
 @import GooglePlaces;
 @import GoogleMaps;
 
@@ -49,7 +49,7 @@ static void InitializeFlipper(UIApplication *application) {
   [self.window makeKeyAndVisible];
   
   // FireBase
-  [FIRApp configure];
+  // [FIRApp configure]; We dont nee this as of now.
   
   // Google Maps
   [GMSPlacesClient provideAPIKey:@"AIzaSyDg53FfhFAKxa4R-q7RLnHqS5IAurn2wmU"];
