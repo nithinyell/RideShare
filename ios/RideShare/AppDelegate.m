@@ -12,10 +12,6 @@
 #import <SKIOSNetworkPlugin/SKIOSNetworkAdapter.h>
 #import <FlipperKitReactPlugin/FlipperKitReactPlugin.h>
 
-//@import Firebase; Used for Analytics
-@import GooglePlaces;
-@import GoogleMaps;
-
 static void InitializeFlipper(UIApplication *application) {
   FlipperClient *client = [FlipperClient sharedClient];
   SKDescriptorMapper *layoutDescriptorMapper = [[SKDescriptorMapper alloc] initWithDefaults];
@@ -26,6 +22,10 @@ static void InitializeFlipper(UIApplication *application) {
   [client start];
 }
 #endif
+
+// @import Firebase; Used for Analytics
+@import GooglePlaces;
+@import GoogleMaps;
 
 @implementation AppDelegate
 
