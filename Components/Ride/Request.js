@@ -14,6 +14,7 @@ export default function Request({ route, navigation }) {
     const GOOGLE_MAPS_APIKEY = 'AIzaSyDg53FfhFAKxa4R-q7RLnHqS5IAurn2wmU';
     const [lat, setLat] = useState('')
     const [lon, setlon] = useState('')
+    const [currentLocation, setCurrentLocation] = useState(null)
     const [origin, setOrigin] = useState('')
     const [destination, setDestination] = useState('')
 
@@ -22,11 +23,8 @@ export default function Request({ route, navigation }) {
     let poolReference = database().ref(reference)
 
     useEffect(() => {
-        // TO capture user current location
-        // Geolocation.getCurrentPosition((info) => {
-        //     //console.log(info)
-        // })
-    })
+        //Geolocation.getCurrentPosition(info => setCurrentLocation(info.coords));
+    }, [currentLocation])
 
     const sendData = () => {
 

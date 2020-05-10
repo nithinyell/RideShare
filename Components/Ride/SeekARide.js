@@ -34,10 +34,12 @@ export default function SeekARide({ route, navigation }) {
                     <Text>Raise a Request</Text>
                 </TouchableOpacity>
             </View>
-            <View style={{ flex: 0.9 }}>
+            <View style={{ flex: 0.9, }}>
                 {
-                    rawData == [] ?
-                    <Text>NO DATA TO DISPLAY</Text>
+                    rawData.length == 0 ?
+                    <View style={{justifyContent: 'center', alignItems: 'center'}}>                    
+                        <Text>NO DATA TO DISPLAY</Text>
+                    </View>
                    :
                    <FlatList
                    data={rawData}
