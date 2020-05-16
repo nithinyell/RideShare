@@ -16,8 +16,8 @@ const AuthManager = {
         }
     },
 
-    signOut: function() {
-        
+    signOut: function (callBack) {
+        auth().signOut().then(() => callBack(true))
     }
 }
 

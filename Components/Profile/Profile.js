@@ -19,8 +19,12 @@ export default function Profile({ route, navigation }) {
         })
     })
     
-    function logout() { // TODO Move this to Auth Manager
-        auth().signOut().then(() => navigation.navigate('Login'))
+    function logout() { 
+        AuthManager.signOut((res) => {
+            if (res) {
+                navigation.navigate('Login')
+            }
+        })
     }
 
     return (
