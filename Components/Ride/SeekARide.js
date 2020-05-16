@@ -29,23 +29,25 @@ export default function SeekARide({ route, navigation }) {
 
     return (
         <View style={{ flex: 1, flexDirection: 'column' }}>
-            <View style={{ flex: 0.1 }}>
-                <TouchableOpacity onPress={() => openRequestPage()}>
-                    <Text>Raise a Request</Text>
-                </TouchableOpacity>
+            <View style={{ flex: 0.05, flexDirection: 'row', justifyContent: 'center' }}>
+                <View style={{ flex: 4, alignItems: 'center' }}>
+                    <TouchableOpacity onPress={() => openRequestPage()}>
+                        <Text>Raise a Request</Text>
+                    </TouchableOpacity>
+                </View>
             </View>
-            <View style={{ flex: 0.9, }}>
+            <View style={{ flex: 0.95 }}>
                 {
                     rawData.length == 0 ?
-                    <View style={{justifyContent: 'center', alignItems: 'center'}}>                    
-                        <Text>NO DATA TO DISPLAY</Text>
-                    </View>
-                   :
-                   <FlatList
-                   data={rawData}
-                   keyExtractor={ride => ride.date}
-                   renderItem={({item}) => <CardView ride={item}/>}
-                    /> 
+                        <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+                            <Text>NO DATA TO DISPLAY</Text>
+                        </View>
+                        :
+                        <FlatList
+                            data={rawData}
+                            keyExtractor={ride => ride.date}
+                            renderItem={({ item }) => <CardView ride={item} />}
+                        />
                 }
             </View>
         </View>

@@ -106,12 +106,17 @@ export default function Request({ route, navigation }) {
 
     return (
         <View style={{ flex: 1, padding: 10 }}>
-
-            <View style={{ flex: 0.2, alignItems: 'center', }}>
-                <View style={{}}>
-                    <Text style={{ fontWeight: 'bold' }}>Raise Request</Text>
+            <View style={{ flex: 0.2, }}>
+                <View style={{flexDirection: 'row', flex: 1}}>
+                    <View style={{justifyContent: 'center', flex: 0.8}}>
+                        <Text style={{ fontWeight: 'bold' }}>Raise Request</Text>
+                    </View>
+                    <View style={{ flex: 0.2 }}>
+                        <TouchableOpacity onPress={() => navigation.goBack()}>
+                            <Text style={{ color: 'blue' }}>Cancel</Text>
+                        </TouchableOpacity>
+                    </View>
                 </View>
-
                 <View style={{ flexDirection: 'row', marginTop: 15 }}>
                     <View style={{ flex: 0.5, backgroundColor: '#82E0AA' }}>
                         <TouchableOpacity onPress={() => {
