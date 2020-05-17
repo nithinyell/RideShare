@@ -6,9 +6,10 @@ import { TouchableOpacity, TouchableNativeFeedback } from 'react-native-gesture-
 import RNGooglePlaces from 'react-native-google-places';
 import Geolocation from '@react-native-community/geolocation';
 import MapViewDirections from 'react-native-maps-directions';
-import database from '@react-native-firebase/database';
 import DateTimePicker from '@react-native-community/datetimepicker';
+
 import * as common from '../Utils/Common'
+import * as DataBaseManager from '../Data/DataManager'
 
 // https://aboutreact.com/react-native-map-example/
 
@@ -44,29 +45,22 @@ export default function Request({ route, navigation }) {
         showMode('time');
     };
 
-    var randomNumber = Math.floor(Math.random() * 100) + 1
-    let reference = '/Pool/' + randomNumber + '/'
-    let poolReference = database().ref(reference)
-
     useEffect(() => {
         // TODO Geolocation.getCurrentPosition(info => setCurrentLocation(info.coords));
     }, [currentLocation])
 
     const sendData = () => {
-
-        if (origin != '' && destination != '')
-            poolReference.set({
-                origin: origin.name,
-                destination: destination.name,
-                location: {
-                    origin: origin.location,
-                    destination: destination.location
-                },
-                date: new Date()
-            }).then(() => navigation.goBack())
-        else
-            // TODO Display an alert
-            console.warn("ORIGIN AND DEST MUST BE SET")
+        if (origin != '' && destination != '') {
+            DataBaseManager.sendData(origin, destination, date, (res) => {
+                if (res) {
+                    navigation.goBack()
+                } else {
+                    // TODO show that save to FB is fail
+                }
+            })
+        } else {
+            // TODO Display toast
+        }
     }
 
     function androidDatePicker() {
@@ -97,6 +91,7 @@ export default function Request({ route, navigation }) {
                     timeZoneOffsetInMinutes={0}
                     value={date}
                     mode='datetime'
+                    is24Hour={true}
                     display="default"
                     onChange={onChange}
                 />
