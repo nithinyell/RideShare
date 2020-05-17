@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { View, Text, SafeAreaView, TouchableOpacity, ActivityIndicator } from 'react-native';
+import { View, Text, SafeAreaView, TouchableOpacity, ActivityIndicator, RefreshControl } from 'react-native';
 import { useState, useEffect } from 'react'
-import { FlatList } from 'react-native-gesture-handler';
+import { FlatList, ScrollView } from 'react-native-gesture-handler';
 import CardView from '../Utils/CardView';
 
 import * as DataBaseManager from '../Data/DataManager'
@@ -9,16 +9,19 @@ import * as DataBaseManager from '../Data/DataManager'
 export default function SeekARide({ route, navigation }) {
 
     const [rawData, setRawData] = useState([])
+    const [refreshing, setRefreshing] = useState(false);
 
     useEffect(() => {
         getData()
     }, [])
 
-    getData = () => {
+    const getData = React.useCallback(() => {
+        setRefreshing(true);
         DataBaseManager.fetchData((data) => {
             setRawData(data)
+            setRefreshing(false);
         })
-    }
+    })
 
     const openRequestPage = () => {
         navigation.navigate('RequestModal')
@@ -26,16 +29,9 @@ export default function SeekARide({ route, navigation }) {
 
     return (
         <View style={{ flex: 1, flexDirection: 'column' }}>
-            <View style={{ flex: 0.05, flexDirection: 'row', justifyContent: 'center' }}>
-                <View style={{ flex: 4, alignItems: 'center' }}>
-                    <TouchableOpacity onPress={() => openRequestPage()}>
-                        <Text>Raise a Request</Text>
-                    </TouchableOpacity>
-                </View>
-            </View>
-            <View style={{ flex: 0.95 }}>
+            <View style={{ flex: 1 }}>
                 {
-                    rawData.length == 0 ? 
+                    rawData.length == 0 ?
                         <ActivityIndicator size="large" color="#0000ff" />
                         // TODO show no data when []
                         // <View style={{ justifyContent: 'center', alignItems: 'center' }}>
@@ -43,6 +39,7 @@ export default function SeekARide({ route, navigation }) {
                         // </View>
                         :
                         <FlatList
+                            refreshControl={<RefreshControl refreshing={refreshing} onRefresh={getData} />}
                             data={rawData}
                             keyExtractor={ride => ride.date}
                             renderItem={({ item }) => <CardView ride={item} />}
