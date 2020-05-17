@@ -11,10 +11,14 @@ export default function SeekARide({ route, navigation }) {
     const [rawData, setRawData] = useState([])
 
     useEffect(() => {
+        getData()
+    }, [])
+
+    getData = () => {
         DataBaseManager.fetchData((data) => {
             setRawData(data)
         })
-    }, [])
+    }
 
     const openRequestPage = () => {
         navigation.navigate('RequestModal')
