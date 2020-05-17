@@ -5,7 +5,7 @@ import { TouchableOpacity, ScrollView } from 'react-native-gesture-handler';
 export default function OfferARide({ route, navigation }) {
 
     const openRequestPage = () => {
-        console.log("OPen page request")
+        navigation.navigate('RequestModal')
     }
 
     return (

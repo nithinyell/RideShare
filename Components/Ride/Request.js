@@ -100,76 +100,110 @@ export default function Request({ route, navigation }) {
     }
 
     return (
-        <View style={{ flex: 1, padding: 10 }}>
-            <View style={{ flex: 0.2, }}>
-                <View style={{flexDirection: 'row', flex: 1}}>
-                    <View style={{justifyContent: 'center', flex: 0.8}}>
-                        <Text style={{ fontWeight: 'bold' }}>Raise Request</Text>
-                    </View>
-                    <View style={{ flex: 0.2 }}>
-                        <TouchableOpacity onPress={() => navigation.goBack()}>
-                            <Text style={{ color: 'blue' }}>Cancel</Text>
-                        </TouchableOpacity>
-                    </View>
-                </View>
-                <View style={{ flexDirection: 'row', marginTop: 15 }}>
-                    <View style={{ flex: 0.5, backgroundColor: '#82E0AA' }}>
-                        <TouchableOpacity onPress={() => {
-                            RNGooglePlaces.openAutocompleteModal()
-                                .then((place) => {
-                                    setOrigin(place)
-                                })
-                                .catch(error => console.log(error.message));
-                        }}>
-                            <Text style={styles.header}>From:</Text>
-                        </TouchableOpacity>
-                        <Text style={styles.subheader}>{origin != '' ? origin.name : 'Not Set'}</Text>
-                    </View>
-                    <View style={{ flex: 0.5, backgroundColor: '#D98880' }}>
-                        <TouchableOpacity onPress={() => {
-                            RNGooglePlaces.openAutocompleteModal()
-                                .then((place) => {
-                                    setDestination(place)
-                                })
-                                .catch(error => console.log(error.message));
-                        }}>
-                            <Text style={styles.header}>To:</Text>
-                        </TouchableOpacity>
-                        <Text style={styles.subheader}>{destination != '' ? destination.name : 'Not Set'}</Text>
-                    </View>
-                </View>
+      <View style={{flex: 1, padding: 10}}>
+        <View style={{flex: 0.05, backgroundColor: '#e1e1e1', borderRadius: 10, padding: 10}}>
+          <View style={{flexDirection: 'row', flex: 1, alignItems: 'center'}}>
+            <View style={{flex: 0.8}}>
+              <Text style={{fontWeight: 'bold'}}>Raise Request</Text>
             </View>
-            <View>
-                <TouchableNativeFeedback onPress={showDatepicker}>
-                    <Text>Date: {common.dateFormatter(date).date}</Text>
-                </TouchableNativeFeedback>
+            <View style={{flex: 0.2, alignItems: 'flex-end'}}>
+              <TouchableOpacity onPress={() => navigation.goBack()}>
+                <Text style={{color: 'blue'}}>Cancel</Text>
+              </TouchableOpacity>
             </View>
-            <View>
-                <TouchableNativeFeedback onPress={showTimepicker}>
-                    <Text>Time: {common.dateFormatter(date).time}</Text>
-                </TouchableNativeFeedback>
+          </View>
+        </View>
+
+        <View style={{flex: 0.25, justifyContent: 'center'}}>
+            <View style={{ backgroundColor: '#82E0AA', padding: 10, borderRadius: 10}}>
+              <TouchableOpacity
+                onPress={() => {
+                  RNGooglePlaces.openAutocompleteModal()
+                    .then((place) => {
+                      setOrigin(place);
+                    })
+                    .catch((error) => console.log(error.message));
+                }}>
+                <Text style={styles.header}>
+                  From:{' '}
+                  <Text style={styles.subheader}>
+                    {origin != '' ? origin.name : ''}
+                  </Text>
+                </Text>
+              </TouchableOpacity>
             </View>
-            {
-                Platform.OS === 'android' ? androidDatePicker() : null
-            }
-            {
-                Platform.OS === 'ios' ?
-                    <View style={{ flex: 0.3 }}>
-                        <View>
-                            {
-                                Platform.OS === 'ios' ?
-                                    iOSDatePicker() : null
-                            }
-                        </View>
-                    </View> : null
-            }
-            <View style={{ flex: 0.2, alignItems: 'center', justifyContent: 'center' }}>
-                <TouchableOpacity onPress={() => sendData()}>
-                    <Text style={{ fontWeight: '400', fontSize: 25 }}>Confirm</Text>
-                </TouchableOpacity>
+            <View
+              style={{
+                backgroundColor: '#D98880',
+                padding: 10,
+                borderRadius: 10,
+                top: 7.5,
+              }}>
+              <TouchableOpacity
+                onPress={() => {
+                  RNGooglePlaces.openAutocompleteModal()
+                    .then((place) => {
+                      setDestination(place);
+                    })
+                    .catch((error) => console.log(error.message));
+                }}>
+                <Text style={styles.header}>
+                  To:{' '}
+                  <Text style={styles.subheader}>
+                    {destination != '' ? destination.name : ''}
+                  </Text>
+                </Text>
+              </TouchableOpacity>
             </View>
-            <View style={{ flex: 0.3 }}>
-                {/* <MapView
+        </View>
+
+        <View style={{flex: 0.4, borderRadius: 10, backgroundColor: '#e1e1e1', padding: 10}}>
+          <View>
+            <TouchableNativeFeedback onPress={showDatepicker}>
+              <Text style={styles.header}>
+                Date:{' '}
+                <Text style={styles.subheader}>
+                  {common.dateFormatter(date).date}
+                </Text>
+              </Text>
+            </TouchableNativeFeedback>
+          </View>
+          <View>
+            <TouchableNativeFeedback onPress={showTimepicker}>
+              <Text style={styles.header}>
+                Time:{' '}
+                <Text style={styles.subheader}>
+                  {common.dateFormatter(date).time}
+                </Text>
+              </Text>
+            </TouchableNativeFeedback>
+          </View>
+          {Platform.OS === 'android' ? androidDatePicker() : null}
+          {Platform.OS === 'ios' ? (
+            <View style={{}}>
+              <View>{Platform.OS === 'ios' ? iOSDatePicker() : null}</View>
+            </View>
+          ) : null}
+        </View>
+
+        <View
+          style={{
+            flex: 0.3,
+            alignItems: 'center',
+            justifyContent: 'flex-start',
+            top: 25
+            //backgroundColor: 'red',
+          }}>
+          <View style={{borderRadius: 10, backgroundColor: '#ff4c4c', paddingHorizontal: 25, paddingVertical: 12}}>
+            <TouchableOpacity onPress={() => sendData()}>
+              <Text style={{fontWeight: '400', fontSize: 18, color: 'white'}}>
+                Confirm
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+
+        {/* <MapView
                     style={styles.map}
                     initialRegion={{
                         latitude: 37.78825,
@@ -181,9 +215,8 @@ export default function Request({ route, navigation }) {
                 >
                     <MapViewDirections origin={origin.location} destination={destination.location} apikey={GOOGLE_MAPS_APIKEY} />
                 </MapView> */}
-            </View>
-        </View>
-    )
+      </View>
+    );
 }
 
 const styles = StyleSheet.create({
