@@ -24,7 +24,7 @@ export default function SeekARide({ route, navigation }) {
     })
 
     const openRequestPage = () => {
-        navigation.navigate('RequestModal')
+        navigation.navigate('RequestModal', {rideStyle: 'Offer A Ride'})
     }
 
     return (

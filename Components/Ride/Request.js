@@ -104,7 +104,7 @@ export default function Request({ route, navigation }) {
         <View style={{flex: 0.05, backgroundColor: '#e1e1e1', borderRadius: 10, padding: 10}}>
           <View style={{flexDirection: 'row', flex: 1, alignItems: 'center'}}>
             <View style={{flex: 0.8}}>
-              <Text style={{fontWeight: 'bold'}}>Raise Request</Text>
+              <Text style={{fontWeight: 'bold'}}>{route.params.rideStyle}</Text>
             </View>
             <View style={{flex: 0.2, alignItems: 'flex-end'}}>
               <TouchableOpacity onPress={() => navigation.goBack()}>
@@ -192,7 +192,6 @@ export default function Request({ route, navigation }) {
             alignItems: 'center',
             justifyContent: 'flex-start',
             top: 25
-            //backgroundColor: 'red',
           }}>
           <View style={{borderRadius: 10, backgroundColor: 'tomato', paddingHorizontal: 25, paddingVertical: 12}}>
             <TouchableOpacity onPress={() => sendData()}>
