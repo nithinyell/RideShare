@@ -50,8 +50,8 @@ export default function Request({ route, navigation }) {
     }, [currentLocation])
 
     const sendData = () => {
-        if (true) {
-            DataBaseManager.sendData(origin, destination, date, route.params.ride, (res) => {
+        if (origin != '' && destination != '') {
+            DataBaseManager.sendData(origin, destination, date, (res) => {
                 if (res) {
                     navigation.goBack()
                 } else {
