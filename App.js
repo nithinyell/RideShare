@@ -17,9 +17,10 @@ import Login from './Components/Login';
 import Home from './Components/Home/Home';
 import Profile from './Components/Profile/Profile';
 import Ride from './Components/Ride/Ride';
-import OfferARide from './Components/Ride/OfferARide';
-import SeekARide from './Components/Ride/SeekARide';
 import Request from './Components/Ride/Request';
+import { Image } from 'react-native';
+import Offer from './Components/Ride/Offer';
+import Seek from './Components/Ride/Seek';
 
 const Stack = createStackNavigator()
 const Tab = createBottomTabNavigator()
@@ -46,7 +47,7 @@ const App: () => React$Node = () => {
   function SeekRideStack() {
     return (
       <Stack.Navigator mode='modal' headerMode='none'>
-        <Stack.Screen name='Accept' component={SeekARide} />
+        <Stack.Screen name='Accept' component={Seek} />
         <Stack.Screen name='RequestModal' component={Request} />
       </Stack.Navigator>
     )
@@ -56,7 +57,7 @@ const App: () => React$Node = () => {
     return(
       <TopTab.Navigator>
         <TopTab.Screen name="Accept" component={SeekRideStack}/>
-        <TopTab.Screen name="Offer" component={OfferARide}/>
+        <TopTab.Screen name="Offer" component={Offer}/>
       </TopTab.Navigator>
     )
   }
@@ -71,7 +72,23 @@ const App: () => React$Node = () => {
 
   function HomeScreens() {
     return (
-      <Tab.Navigator>
+      <Tab.Navigator
+      screenOptions={({ route }) => ({
+        tabBarIcon: ({ focused, color, size }) => {
+          if (route.name === 'Home') {
+            return <Image style={{width: 25, height: 25}} source={require('./Assets/newspaper.png')}/>
+          } else if (route.name === 'Profile') {
+            return <Image style={{width: 25, height: 25}} source={require('./Assets/user.png')}/>
+          } else if (route.name === 'Ride') {
+            return <Image style={{width: 25, height: 25}} source={require('./Assets/ride.png')}/>
+          }
+        },
+      })}
+      tabBarOptions={{
+        activeTintColor: 'tomato',
+        inactiveTintColor: 'gray',
+      }}
+      >
         <Tab.Screen name='Ride' component={RideStack} />
         <Tab.Screen name='Home' component={HomeStack} />
         <Tab.Screen name='Profile' component={ProfileStack} />

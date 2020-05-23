@@ -1,28 +1,45 @@
-// import database from '@react-native-firebase/database';
-// import AuthManager from '../Auth/UserAuth';
+import database from '@react-native-firebase/database';
+import AuthManager from '../Auth/UserAuth';
 
-// // const DataManager = {
+var userId = AuthManager.currentUser().uid
+let globalReference = userId + '/'
+let globalDataBase = database()
+// let acceptReference = '/Accept/' + userId + randomNumber + '/'
+// let seekReference = '/Seek/' 
+// let poolReference = database().ref(reference)
+// var fetchReference = database().ref('/TEST')
 
-// //     sendData: function () {
-// //         database.ref(poolReference).set({
-// //             from: "HYD",
-// //             to: "CHENNAI",
-// //             date: "22/02/2021"
-// //         }).
-// //     }
-// // }
+export function sendData(origin, destination, date, ref, completion) {
 
-// // export default DataManager
+    var randomNumber = Math.floor(Math.random() * 100) + 1
+    let reference = globalDataBase.ref(`${ref}/` + randomNumber + '/')
 
-// export default function DataManager() {
+    reference.set({
+        origin: origin.name,
+        destination: destination.name,
+        location: {
+            origin: origin.location,
+            destination: destination.location
+        },
+        journeyDate: date,
+        requestRaisedDate: new Date()
+    }).then(() => completion(true))
+}
 
-//     const poolReference = poolReference = '/Pools/' + AuthManager.currentUser().uid + '/'
-    
-//     const sendData = () => {
-//         database().ref(poolReference).set({
-//             from: "HYD",
-//             to: "CHENNAI",
-//             date: "22/02/2021"
-//         }).then(() => {console.log("data Sent")})
-//     }
-// }
+export function fetchData(ref, completion) {
+
+    var userData = []
+    let reference = globalDataBase.ref('/' + `${ref}`)
+
+    reference.on('value', snapshot => {
+        var data = snapshot.val()
+
+        Object.keys(data).map(key => {
+            userData.push(data[key])
+        })
+
+        if (userData) {
+            completion(userData)
+        }
+    })
+}

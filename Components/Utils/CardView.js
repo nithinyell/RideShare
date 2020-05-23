@@ -1,23 +1,25 @@
 import * as React from 'react';
 import { View, Text, SafeAreaView, TouchableOpacity, StyleSheet } from 'react-native';
+import * as common from '../Utils/Common'
 
 export default function CardView({ride}) {
 
+    const {date, time} = common.dateFormatter(new Date(Date.parse(ride.journeyDate)))
     return (
         <View style={styles.cardStyle}>
-            <View style={{ felx: 0.5, flexDirection:'row' }}>
-                <View style={{ flex: 0.45}}>
-                    <Text style={{fontSize: 15, fontWeight: '600'}}>{ride.origin}</Text>
+            <View style={{ felx: 0.5, flexDirection: 'row' }}>
+                <View style={{ flex: 0.45 }}>
+                    <Text style={{ fontSize: 15, fontWeight: '600' }}>{ride.origin}</Text>
                 </View>
-                <View style={{flex: 0.1, alignItems: 'center'}}>
+                <View style={{ flex: 0.1, alignItems: 'center' }}>
                     <Text>--></Text>
                 </View>
-                <View style={{flex: 0.45}}>
-                    <Text style={{fontSize: 15, fontWeight: '600'}}>{ride.destination}</Text>
+                <View style={{ flex: 0.45 }}>
+                    <Text style={{ fontSize: 15, fontWeight: '600' }}>{ride.destination}</Text>
                 </View>
             </View>
-            <View style={{flex: 0.5}}>
-                <Text>HAI</Text>
+            <View style={{ flex: 0.5 }}>
+                <Text>{date} {time}(24hs)</Text>
             </View>
         </View>
     )

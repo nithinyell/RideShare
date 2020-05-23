@@ -1,14 +1,15 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
-import { View, Text, SafeAreaView, StyleSheet, Button, Platform } from 'react-native';
+import { View, Text, SafeAreaView, StyleSheet, Button, Platform, Image } from 'react-native';
 import MapView, { Marker } from 'react-native-maps'
 import { TouchableOpacity, TouchableNativeFeedback } from 'react-native-gesture-handler';
 import RNGooglePlaces from 'react-native-google-places';
 import Geolocation from '@react-native-community/geolocation';
 import MapViewDirections from 'react-native-maps-directions';
-import database from '@react-native-firebase/database';
 import DateTimePicker from '@react-native-community/datetimepicker';
+
 import * as common from '../Utils/Common'
+import * as DataBaseManager from '../Data/DataManager'
 
 // https://aboutreact.com/react-native-map-example/
 
@@ -44,29 +45,22 @@ export default function Request({ route, navigation }) {
         showMode('time');
     };
 
-    var randomNumber = Math.floor(Math.random() * 100) + 1
-    let reference = '/Pool/' + randomNumber + '/'
-    let poolReference = database().ref(reference)
-
     useEffect(() => {
         // TODO Geolocation.getCurrentPosition(info => setCurrentLocation(info.coords));
     }, [currentLocation])
 
     const sendData = () => {
-
-        if (origin != '' && destination != '')
-            poolReference.set({
-                origin: origin.name,
-                destination: destination.name,
-                location: {
-                    origin: origin.location,
-                    destination: destination.location
-                },
-                date: new Date()
-            }).then(() => navigation.goBack())
-        else
-            // TODO Display an alert
-            console.warn("ORIGIN AND DEST MUST BE SET")
+        if (origin != '' && destination != '') {
+            DataBaseManager.sendData(origin, destination, date, route.params.ride, (res) => {
+                if (res) {
+                    navigation.goBack()
+                } else {
+                    // TODO show that save to FB is fail
+                }
+            })
+        } else {
+            // TODO Display toast
+        }
     }
 
     function androidDatePicker() {
@@ -97,6 +91,7 @@ export default function Request({ route, navigation }) {
                     timeZoneOffsetInMinutes={0}
                     value={date}
                     mode='datetime'
+                    is24Hour={true}
                     display="default"
                     onChange={onChange}
                 />
@@ -105,71 +100,109 @@ export default function Request({ route, navigation }) {
     }
 
     return (
-        <View style={{ flex: 1, padding: 10 }}>
+      <View style={{flex: 1, padding: 10}}>
+        <View style={{flex: 0.05, backgroundColor: '#e1e1e1', borderRadius: 10, padding: 10}}>
+          <View style={{flexDirection: 'row', flex: 1, alignItems: 'center'}}>
+            <View style={{flex: 0.8}}>
+              <Text style={{fontWeight: 'bold'}}>{route.params.ride} A Ride</Text>
+            </View>
+            <View style={{flex: 0.2, alignItems: 'flex-end'}}>
+              <TouchableOpacity onPress={() => navigation.goBack()}>
+              <Image style={{width: 25, height: 25}} source={require('../../Assets/close.png')}/>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </View>
 
-            <View style={{ flex: 0.2, alignItems: 'center', }}>
-                <View style={{}}>
-                    <Text style={{ fontWeight: 'bold' }}>Raise Request</Text>
-                </View>
+        <View style={{flex: 0.25, justifyContent: 'center'}}>
+            <View style={{ backgroundColor: '#82E0AA', padding: 10, borderRadius: 10}}>
+              <TouchableOpacity
+                onPress={() => {
+                  RNGooglePlaces.openAutocompleteModal()
+                    .then((place) => {
+                      setOrigin(place);
+                    })
+                    .catch((error) => console.log(error.message));
+                }}>
+                <Text style={styles.header}>
+                  From:{' '}
+                  <Text style={styles.subheader}>
+                    {origin != '' ? origin.name : ''}
+                  </Text>
+                </Text>
+              </TouchableOpacity>
+            </View>
+            <View
+              style={{
+                backgroundColor: '#D98880',
+                padding: 10,
+                borderRadius: 10,
+                top: 7.5,
+              }}>
+              <TouchableOpacity
+                onPress={() => {
+                  RNGooglePlaces.openAutocompleteModal()
+                    .then((place) => {
+                      setDestination(place);
+                    })
+                    .catch((error) => console.log(error.message));
+                }}>
+                <Text style={styles.header}>
+                  To:{' '}
+                  <Text style={styles.subheader}>
+                    {destination != '' ? destination.name : ''}
+                  </Text>
+                </Text>
+              </TouchableOpacity>
+            </View>
+        </View>
 
-                <View style={{ flexDirection: 'row', marginTop: 15 }}>
-                    <View style={{ flex: 0.5, backgroundColor: '#82E0AA' }}>
-                        <TouchableOpacity onPress={() => {
-                            RNGooglePlaces.openAutocompleteModal()
-                                .then((place) => {
-                                    setOrigin(place)
-                                })
-                                .catch(error => console.log(error.message));
-                        }}>
-                            <Text style={styles.header}>From:</Text>
-                        </TouchableOpacity>
-                        <Text style={styles.subheader}>{origin != '' ? origin.name : 'Not Set'}</Text>
-                    </View>
-                    <View style={{ flex: 0.5, backgroundColor: '#D98880' }}>
-                        <TouchableOpacity onPress={() => {
-                            RNGooglePlaces.openAutocompleteModal()
-                                .then((place) => {
-                                    setDestination(place)
-                                })
-                                .catch(error => console.log(error.message));
-                        }}>
-                            <Text style={styles.header}>To:</Text>
-                        </TouchableOpacity>
-                        <Text style={styles.subheader}>{destination != '' ? destination.name : 'Not Set'}</Text>
-                    </View>
-                </View>
+        <View style={{flex: 0.4, borderRadius: 10, backgroundColor: '#e1e1e1', padding: 10}}>
+          <View>
+            <TouchableNativeFeedback onPress={showDatepicker}>
+              <Text style={styles.header}>
+                Date:{' '}
+                <Text style={styles.subheader}>
+                  {common.dateFormatter(date).date}
+                </Text>
+              </Text>
+            </TouchableNativeFeedback>
+          </View>
+          <View>
+            <TouchableNativeFeedback onPress={showTimepicker}>
+              <Text style={styles.header}>
+                Time:{' '}
+                <Text style={styles.subheader}>
+                  {common.dateFormatter(date).time}
+                </Text>
+              </Text>
+            </TouchableNativeFeedback>
+          </View>
+          {Platform.OS === 'android' ? androidDatePicker() : null}
+          {Platform.OS === 'ios' ? (
+            <View style={{}}>
+              <View>{Platform.OS === 'ios' ? iOSDatePicker() : null}</View>
             </View>
-            <View>
-                <TouchableNativeFeedback onPress={showDatepicker}>
-                    <Text>Date: {common.dateFormatter(date).date}</Text>
-                </TouchableNativeFeedback>
-            </View>
-            <View>
-                <TouchableNativeFeedback onPress={showTimepicker}>
-                    <Text>Time: {common.dateFormatter(date).time}</Text>
-                </TouchableNativeFeedback>
-            </View>
-            {
-                Platform.OS === 'android' ? androidDatePicker() : null
-            }
-            {
-                Platform.OS === 'ios' ?
-                    <View style={{ flex: 0.3 }}>
-                        <View>
-                            {
-                                Platform.OS === 'ios' ?
-                                    iOSDatePicker() : null
-                            }
-                        </View>
-                    </View> : null
-            }
-            <View style={{ flex: 0.2, alignItems: 'center', justifyContent: 'center' }}>
-                <TouchableOpacity onPress={() => sendData()}>
-                    <Text style={{ fontWeight: '400', fontSize: 25 }}>Confirm</Text>
-                </TouchableOpacity>
-            </View>
-            <View style={{ flex: 0.3 }}>
-                {/* <MapView
+          ) : null}
+        </View>
+
+        <View
+          style={{
+            flex: 0.3,
+            alignItems: 'center',
+            justifyContent: 'flex-start',
+            top: 25
+          }}>
+          <View style={{borderRadius: 10, backgroundColor: 'tomato', paddingHorizontal: 25, paddingVertical: 12}}>
+            <TouchableOpacity onPress={() => sendData()}>
+              <Text style={{fontWeight: '400', fontSize: 18, color: 'white'}}>
+                Confirm
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+
+        {/* <MapView
                     style={styles.map}
                     initialRegion={{
                         latitude: 37.78825,
@@ -181,9 +214,8 @@ export default function Request({ route, navigation }) {
                 >
                     <MapViewDirections origin={origin.location} destination={destination.location} apikey={GOOGLE_MAPS_APIKEY} />
                 </MapView> */}
-            </View>
-        </View>
-    )
+      </View>
+    );
 }
 
 const styles = StyleSheet.create({

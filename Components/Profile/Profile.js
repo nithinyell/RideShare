@@ -7,10 +7,6 @@ import AuthManager from '../Auth/UserAuth';
 
 export default function Profile({ route, navigation }) {
 
-    var randomNumber = Math.floor(Math.random() * 100) + 1 
-    let reference = '/Pool/' + randomNumber + '/'
-    let poolReference = database().ref(reference)
-
     React.useLayoutEffect(() => {
         navigation.setOptions({
             headerRight: () => (
@@ -19,8 +15,12 @@ export default function Profile({ route, navigation }) {
         })
     })
     
-    function logout() { // TODO Move this to Auth Manager
-        auth().signOut().then(() => navigation.navigate('Login'))
+    function logout() { 
+        AuthManager.signOut((res) => {
+            if (res) {
+                navigation.navigate('Login')
+            }
+        })
     }
 
     return (
