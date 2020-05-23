@@ -50,8 +50,8 @@ export default function Request({ route, navigation }) {
     }, [currentLocation])
 
     const sendData = () => {
-        if (origin != '' && destination != '') {
-            DataBaseManager.sendData(origin, destination, date, (res) => {
+        if (true) {
+            DataBaseManager.sendData(origin, destination, date, route.params.ride, (res) => {
                 if (res) {
                     navigation.goBack()
                 } else {
@@ -104,7 +104,7 @@ export default function Request({ route, navigation }) {
         <View style={{flex: 0.05, backgroundColor: '#e1e1e1', borderRadius: 10, padding: 10}}>
           <View style={{flexDirection: 'row', flex: 1, alignItems: 'center'}}>
             <View style={{flex: 0.8}}>
-              <Text style={{fontWeight: 'bold'}}>{route.params.rideStyle}</Text>
+              <Text style={{fontWeight: 'bold'}}>{route.params.ride} A Ride</Text>
             </View>
             <View style={{flex: 0.2, alignItems: 'flex-end'}}>
               <TouchableOpacity onPress={() => navigation.goBack()}>

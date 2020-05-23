@@ -2,10 +2,10 @@ import * as React from 'react';
 import { View, Text, SafeAreaView, StyleSheet, Image, Button } from 'react-native';
 import { TouchableOpacity, ScrollView } from 'react-native-gesture-handler';
 
-export default function OfferARide({ route, navigation }) {
+export default function Offer({ route, navigation }) {
 
     const openRequestPage = () => {
-        navigation.navigate('RequestModal', {rideStyle: 'Seek A Ride'})
+        navigation.navigate('RequestModal', {ride: 'Offer'})
     }
 
     return (

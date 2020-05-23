@@ -1,14 +1,21 @@
 import database from '@react-native-firebase/database';
 import AuthManager from '../Auth/UserAuth';
 
-var randomNumber = Math.floor(Math.random() * 100) + 1
-let reference = '/TEST/' + randomNumber + '/'
-let poolReference = database().ref(reference)
-var fetchReference = database().ref('/TEST')
 var userId = AuthManager.currentUser().uid
+let globalReference = userId + '/'
+let globalDataBase = database()
+// let acceptReference = '/Accept/' + userId + randomNumber + '/'
+// let seekReference = '/Seek/' 
+// let poolReference = database().ref(reference)
+// var fetchReference = database().ref('/TEST')
 
-export function sendData(origin, destination, date, completion) {
-    poolReference.set({
+export function sendData(origin, destination, date, ref, completion) {
+
+    var randomNumber = Math.floor(Math.random() * 100) + 1
+
+    let reference = globalDataBase.ref(`${ref}/` + randomNumber + '/')
+    console.warn(reference)
+    reference.set({
         origin: origin.name,
         destination: destination.name,
         location: {
@@ -20,10 +27,14 @@ export function sendData(origin, destination, date, completion) {
     }).then(() => completion(true))
 }
 
-export function fetchData(completion) {
+export function fetchData(ref, completion) {
+
     var userData = []
-    fetchReference.on('value', snapshot => {
+    let reference = globalDataBase.ref('/' + `${ref}`)
+    console.warn(reference)
+    reference.on('value', snapshot => {
         var data = snapshot.val()
+        console.log("***", data)
         Object.keys(data).map(key => {
             userData.push(data[key])
         })

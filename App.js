@@ -17,10 +17,10 @@ import Login from './Components/Login';
 import Home from './Components/Home/Home';
 import Profile from './Components/Profile/Profile';
 import Ride from './Components/Ride/Ride';
-import OfferARide from './Components/Ride/OfferARide';
-import SeekARide from './Components/Ride/SeekARide';
 import Request from './Components/Ride/Request';
 import { Image } from 'react-native';
+import Offer from './Components/Ride/Offer';
+import Seek from './Components/Ride/Seek';
 
 const Stack = createStackNavigator()
 const Tab = createBottomTabNavigator()
@@ -47,7 +47,7 @@ const App: () => React$Node = () => {
   function SeekRideStack() {
     return (
       <Stack.Navigator mode='modal' headerMode='none'>
-        <Stack.Screen name='Accept' component={SeekARide} />
+        <Stack.Screen name='Accept' component={Seek} />
         <Stack.Screen name='RequestModal' component={Request} />
       </Stack.Navigator>
     )
@@ -57,7 +57,7 @@ const App: () => React$Node = () => {
     return(
       <TopTab.Navigator>
         <TopTab.Screen name="Accept" component={SeekRideStack}/>
-        <TopTab.Screen name="Offer" component={OfferARide}/>
+        <TopTab.Screen name="Offer" component={Offer}/>
       </TopTab.Navigator>
     )
   }
