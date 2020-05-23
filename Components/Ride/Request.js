@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
-import { View, Text, SafeAreaView, StyleSheet, Button, Platform } from 'react-native';
+import { View, Text, SafeAreaView, StyleSheet, Button, Platform, Image } from 'react-native';
 import MapView, { Marker } from 'react-native-maps'
 import { TouchableOpacity, TouchableNativeFeedback } from 'react-native-gesture-handler';
 import RNGooglePlaces from 'react-native-google-places';
@@ -108,7 +108,7 @@ export default function Request({ route, navigation }) {
             </View>
             <View style={{flex: 0.2, alignItems: 'flex-end'}}>
               <TouchableOpacity onPress={() => navigation.goBack()}>
-                <Text style={{color: 'blue'}}>Cancel</Text>
+              <Image style={{width: 25, height: 25}} source={require('../../Assets/close.png')}/>
               </TouchableOpacity>
             </View>
           </View>
@@ -194,7 +194,7 @@ export default function Request({ route, navigation }) {
             top: 25
             //backgroundColor: 'red',
           }}>
-          <View style={{borderRadius: 10, backgroundColor: '#ff4c4c', paddingHorizontal: 25, paddingVertical: 12}}>
+          <View style={{borderRadius: 10, backgroundColor: 'tomato', paddingHorizontal: 25, paddingVertical: 12}}>
             <TouchableOpacity onPress={() => sendData()}>
               <Text style={{fontWeight: '400', fontSize: 18, color: 'white'}}>
                 Confirm

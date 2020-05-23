@@ -27,7 +27,7 @@ export default function OfferARide({ route, navigation }) {
             } */}
             <View style={styles.addRequest}>
             <TouchableOpacity style={styles.TouchableOpacityStyle} onPress={openRequestPage}>
-                    <Text>ADD</Text>
+                    <Image style={{width: 50, height: 50}} source={require('../../Assets/add.png')}/>
                 </TouchableOpacity>
             </View>  
         </View>

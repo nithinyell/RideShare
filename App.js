@@ -20,6 +20,7 @@ import Ride from './Components/Ride/Ride';
 import OfferARide from './Components/Ride/OfferARide';
 import SeekARide from './Components/Ride/SeekARide';
 import Request from './Components/Ride/Request';
+import { Image } from 'react-native';
 
 const Stack = createStackNavigator()
 const Tab = createBottomTabNavigator()
@@ -71,7 +72,23 @@ const App: () => React$Node = () => {
 
   function HomeScreens() {
     return (
-      <Tab.Navigator>
+      <Tab.Navigator
+      screenOptions={({ route }) => ({
+        tabBarIcon: ({ focused, color, size }) => {
+          if (route.name === 'Home') {
+            return <Image style={{width: 25, height: 25}} source={require('./Assets/newspaper.png')}/>
+          } else if (route.name === 'Profile') {
+            return <Image style={{width: 25, height: 25}} source={require('./Assets/user.png')}/>
+          } else if (route.name === 'Ride') {
+            return <Image style={{width: 25, height: 25}} source={require('./Assets/ride.png')}/>
+          }
+        },
+      })}
+      tabBarOptions={{
+        activeTintColor: 'tomato',
+        inactiveTintColor: 'gray',
+      }}
+      >
         <Tab.Screen name='Ride' component={RideStack} />
         <Tab.Screen name='Home' component={HomeStack} />
         <Tab.Screen name='Profile' component={ProfileStack} />

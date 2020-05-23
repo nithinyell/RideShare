@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, Text, SafeAreaView, TouchableOpacity, ActivityIndicator, RefreshControl, Button, StyleSheet } from 'react-native';
+import { View, Text, SafeAreaView, TouchableOpacity, ActivityIndicator, RefreshControl, Button, StyleSheet, Image } from 'react-native';
 import { useState, useEffect } from 'react'
 import { FlatList, ScrollView } from 'react-native-gesture-handler';
 import CardView from '../Utils/CardView';
@@ -45,8 +45,8 @@ export default function SeekARide({ route, navigation }) {
                             renderItem={({ item }) => <CardView ride={item} />}
                         />
                 }
-                <TouchableOpacity style={styles.TouchableOpacityStyle} onPress={openRequestPage}>
-                    <Text>ADD</Text>
+                <TouchableOpacity style={styles.TouchableOpacityStyle} onPress={openRequestPage}> 
+                <Image style={{width: 50, height: 50}} source={require('../../Assets/add.png')}/>
                 </TouchableOpacity>
             </View>
         </View>
