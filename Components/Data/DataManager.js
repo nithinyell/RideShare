@@ -33,6 +33,7 @@ export function fetchData(ref, completion) {
 
     reference.on('value', snapshot => {
         var data = snapshot.val()
+
         Object.keys(data).map(key => {
             userData.push(data[key])
         })

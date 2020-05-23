@@ -6,8 +6,7 @@ export function dateFormatter(date) {
     date.getFullYear()
 
   var timeStr = ("00" + date.getHours()).slice(-2) + ":" +
-    ("00" + date.getMinutes()).slice(-2) + ":" +
-    ("00" + date.getSeconds()).slice(-2);
+    ("00" + date.getMinutes()).slice(-2)
 
   return { date: dateStr, time: timeStr }
 }
