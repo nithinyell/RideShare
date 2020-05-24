@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useState, useEffect } from 'react';
 import { ActivityIndicator, FlatList, Text, View, StyleSheet, Image, ImageBackground, Platform } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import theme from '../Utils/Theme';
+import Theme from '../Utils/Theme';
 
 export default class NewsCard extends React.PureComponent {
     render() {
@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
         resizeMode: 'cover'
     },
     cardTitle: {
-        fontFamily: theme.FONTFAMILY,
+        fontFamily: Theme.FONTFAMILY,
         fontSize: 16,
         padding: 7
     }, 

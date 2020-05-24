@@ -1,5 +1,5 @@
 
-import { ActivityIndicator, FlatList, Text, View, StyleSheet, Image, ImageBackground, Platform } from 'react-native';
+import { Platform } from 'react-native';
 
 export default {
     COLOR: 'tomato',
