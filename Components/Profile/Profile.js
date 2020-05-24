@@ -27,7 +27,7 @@ export default function Profile({ route, navigation }) {
 
     return (
         <SafeAreaView>
-            <Text> Settings !! </Text>
+            <Text>Hi {AuthManager.currentUser}</Text>
         </SafeAreaView>
     )
 }

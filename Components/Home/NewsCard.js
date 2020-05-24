@@ -7,7 +7,7 @@ import Theme from '../Utils/Theme';
 export default class NewsCard extends React.PureComponent {
     render() {
         return (
-            <TouchableOpacity style={styles.card}>
+            <TouchableOpacity style={styles.card} onPress={this.props.onPressCard}>
                 <Image style={styles.cardImage} source={{uri: this.props.data.urlToImage}}/>
                 <Text style={styles.cardTitle}>{this.props.data.title}</Text>
             </TouchableOpacity>

@@ -4,7 +4,6 @@ import { ActivityIndicator, FlatList, Text, View, StyleSheet } from 'react-nativ
 import NewsCard from './NewsCard';
 import Theme from '../Utils/Theme';
 
-const API_KEY = "http://newsapi.org/v2/everything?q=bitcoin&from=2020-04-24&sortBy=publishedAt&apiKey=eab998021b064fd5a0150245d8722e6e"
 const ENTERTAINMENT = "http://newsapi.org/v2/top-headlines?country=in&category=entertainment&apiKey=eab998021b064fd5a0150245d8722e6e"
 
 export default function Home({ route, navigation }) {
@@ -27,15 +26,21 @@ export default function Home({ route, navigation }) {
     return (
       <View style={{flex: 1}}>
         {isLoading ? (
-          <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-            <ActivityIndicator size="large" color= {Theme.COLOR}/>
+          <View
+            style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+            <ActivityIndicator size="large" color={Theme.COLOR} />
           </View>
         ) : (
           <FlatList
             data={data}
             keyExtractor={(item, index) => index.toString()}
             renderItem={({item}) => (
-              <NewsCard data={item}/>
+              <NewsCard
+                data={item}
+                onPressCard={() => {
+                  navigation.navigate('NewsDetail', {uri: item.url})
+                }}
+              />
             )}
           />
         )}
