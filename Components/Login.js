@@ -44,13 +44,45 @@ export default function Login({ navigation }) {
 
   if (confirm) {
     return (
-      <SafeAreaView>
-        <View>
-          <TextInput style={{ borderColor: 'red', borderRadius: 1, backgroundColor: 'red', width: 60 }} value={code} onChangeText={text => setCode(text)} />
-          <Button title="Confirm Code" onPress={() => confirmCode()} />
-        </View>
-      </SafeAreaView>
-    )
+      <View style={{flex: 1}}>
+        <ImageBackground
+          style={{
+            flex: 1,
+            width: '100%',
+            height: Dimensions.get('screen').height,
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+          source={require('./../Assets/car.jpg')}>
+          <View>
+            <TextInput
+              style={{height: 30}}
+              onChangeText={(text) => setUserphoneNumber(text)}
+              keyboardType="number-pad"
+              placeholder="# Pass Code"
+              placeholderTextColor="#fff"
+              fontFamily={Theme.FONTFAMILY}
+              fontSize={20}
+              color="#fff"
+              value={code} 
+              onChangeText={text => setCode(text)}
+            />
+            <View style={{backgroundColor: '#F7DC6F', height: 5}}></View>
+            <TouchableOpacity
+              onPress={() => confirmCode()}>
+              <Text
+                style={{
+                  fontFamily: Theme.FONTFAMILY,
+                  fontSize: 22,
+                  color: '#F2F4F4',
+                }}>
+                Confirm Code
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </ImageBackground>
+      </View>
+    );
   } 
 
   return (
