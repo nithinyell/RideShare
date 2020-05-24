@@ -9,10 +9,12 @@ export default function Profile({ route, navigation }) {
 
     React.useLayoutEffect(() => {
         navigation.setOptions({
-            headerRight: () => (
-                <Button title="Sign Out" onPress={() => logout()} />
-              )
-        })
+          headerRight: () => (
+            <View style={{marginRight: 10}}>
+              <Button title="Sign Out" onPress={() => logout()} />
+            </View>
+          ),
+        });
     })
     
     function logout() { 
