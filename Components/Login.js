@@ -56,14 +56,13 @@ export default function Login({ navigation }) {
           source={require('./../Assets/car.jpg')}>
           <View>
             <TextInput
-              style={{height: 30}}
+              style={{height: 50}}
               onChangeText={(text) => setUserphoneNumber(text)}
               keyboardType="number-pad"
               placeholder="# Pass Code"
               placeholderTextColor="#fff"
               fontFamily={Theme.FONTFAMILY}
               fontSize={20}
-              color="#fff"
               value={code} 
               onChangeText={text => setCode(text)}
             />
@@ -97,7 +96,7 @@ export default function Login({ navigation }) {
         }}
         source={require('./../Assets/vw.jpg')}>
         <View>
-        <TextInput style={{ height:30}} onChangeText={(text) => setUserphoneNumber(text)} keyboardType='number-pad' placeholder='# Phone' placeholderTextColor='#fff' fontFamily={Theme.FONTFAMILY} fontSize={20} color='#fff'/>
+        <TextInput style={{ height:50}} onChangeText={(text) => setUserphoneNumber(text)} keyboardType='number-pad' placeholder='# Phone' placeholderTextColor='#fff' fontFamily={Theme.FONTFAMILY} fontSize={20}/>
         <View style={{backgroundColor: '#F7DC6F', height: 5}}></View>
         <TouchableOpacity onPress={() => signInWithPhoneNumber('+15413712599')}>
           <Text style={{fontFamily: Theme.FONTFAMILY, fontSize: 22, color: '#F2F4F4'}}>
