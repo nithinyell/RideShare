@@ -21,6 +21,7 @@ import Request from './Components/Ride/Request';
 import { Image } from 'react-native';
 import Offer from './Components/Ride/Offer';
 import Seek from './Components/Ride/Seek';
+import NewsDetails from './Components/Home/NewsDetails';
 
 const Stack = createStackNavigator()
 const Tab = createBottomTabNavigator()
@@ -32,6 +33,7 @@ const App: () => React$Node = () => {
     return (
       <Stack.Navigator>
         <Stack.Screen name="Home" component={Home}/>
+        <Stack.Screen name="NewsDetail" component={NewsDetails} options={{title: "News"}}/>
       </Stack.Navigator>
     )
   }
