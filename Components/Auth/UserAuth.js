@@ -3,7 +3,11 @@ import auth from '@react-native-firebase/auth';
 const AuthManager = {
 
     currentUser: function() {
-        return auth().currentUser._user
+        if (auth().currentUser) {
+            return auth().currentUser._user
+        }
+
+        return ''
     },
 
     signInWithPhoneNumber: async function (phoneNumber) {
