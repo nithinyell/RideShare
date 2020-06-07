@@ -31,7 +31,9 @@ export default function Offer({ route, navigation }) {
         <View style={{ flex: 1 }}>
                 {
                 offerData.length == 0 ?
+                <View style={{flex:1, justifyContent: 'center', alignItems:'center', }}>
                     <ActivityIndicator size="large" color="#0000ff" />
+                </View>
                     // TODO show no data when []
                     // <View style={{ justifyContent: 'center', alignItems: 'center' }}>
                     //     <Text>NO DATA TO DISPLAY</Text>
