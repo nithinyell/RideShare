@@ -32,11 +32,9 @@ export default function Seek({ route, navigation }) {
             <View style={{ flex: 1 }}>
                 {
                     rawData.length == 0 ?
+                    <View style={{flex: 1, alignItems: 'center'}}>
                         <ActivityIndicator size="large" color="tomato" />
-                        // TODO show no data when []
-                        // <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-                        //     <Text>NO DATA TO DISPLAY</Text>
-                        // </View>
+                    </View>                       
                         :
                         <FlatList
                             refreshControl={<RefreshControl refreshing={refreshing} onRefresh={getData} />}
