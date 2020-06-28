@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, Image, ScrollView, TextInput, TouchableOpacity, Button, SafeAreaView, ImageBackground, Dimensions } from 'react-native';
+import { View, Text, Image, ScrollView, TextInput, TouchableOpacity, Button, SafeAreaView, ImageBackground, Dimensions, ToastAndroid } from 'react-native';
 import auth from '@react-native-firebase/auth';
 import AuthManager from './Auth/UserAuth';
 import Theme from './Utils/Theme';
@@ -30,7 +30,11 @@ export default function Login({ navigation }) {
       const confirmation = await AuthManager.signInWithPhoneNumber(phoneNumber)
       setConfirm(confirmation);
     } catch (error) {
-      console.log("error", error)
+      ToastAndroid.showWithGravity(
+        error.message,
+        ToastAndroid.LONG,
+        ToastAndroid.CENTER
+      );
     }
   }
 

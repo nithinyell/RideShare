@@ -185,7 +185,7 @@ export default function Request({ route, navigation }) {
                 ) : null}
             </View>
 
-            <View style={{ borderRadius: 10, backgroundColor: 'tomato', paddingHorizontal: 25, paddingVertical: 12, marginTop: 15, alignItems: 'center'}}>
+            <View style={{ borderRadius: 10, backgroundColor: '#8C7D00', paddingHorizontal: 25, paddingVertical: 12, marginTop: 15, alignItems: 'center'}}>
                 <TouchableOpacity onPress={() => sendData()}>
                     <Text style={{ fontWeight: 'bold', fontSize: 18, color: 'white' }}>
                         Confirm
