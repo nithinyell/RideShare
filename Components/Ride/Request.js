@@ -189,7 +189,7 @@ export default function Request({ route, navigation }) {
                 <TouchableOpacity onPress={() => sendData()}>
                     <Text style={{ fontWeight: 'bold', fontSize: 18, color: 'white' }}>
                         Confirm
-                            </Text>
+                    </Text>
                 </TouchableOpacity>
             </View>
 
